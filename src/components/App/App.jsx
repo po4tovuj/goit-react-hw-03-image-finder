@@ -56,15 +56,15 @@ export class App extends Component {
           );
         }
         const totalPages = Math.ceil(totalHits / 20);
-        const isFristSearch = page === 1;
+        const isFirstSearch = page === 1;
         this.setState(({ images, page, isLoading }) => {
           return {
-            images: !isFristSearch ? images.concat(hits) : hits,
+            images: !isFirstSearch ? images.concat(hits) : hits,
             totalPages,
             isLoading: !isLoading,
           };
         });
-        if (isFristSearch) {
+        if (isFirstSearch) {
           Notify.success(`Hooray! We found ${totalHits} images.`, options);
         }
         return { images: hits, totalPages, page: 1 };
