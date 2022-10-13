@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 
-import { LoadMoreButton } from 'components/Button/Button';
 import { GalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { List } from './ImageGallery.styled';
-import Loader from 'components/Loader/Loader';
-export const Gallery = ({ images, loadMore, isLastPage, isLoading }) => {
+export const Gallery = ({ images }) => {
   return (
     <>
       <List id="gallery-list">
@@ -17,8 +15,6 @@ export const Gallery = ({ images, loadMore, isLastPage, isLoading }) => {
             />
           );
         })}
-        {isLoading && <Loader />}
-        {!isLastPage && !isLoading && <LoadMoreButton handleClick={loadMore} />}
       </List>
     </>
   );

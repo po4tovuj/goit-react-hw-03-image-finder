@@ -21,7 +21,6 @@ export const Button = styled.button`
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   margin: 16px auto 0;
   display: block;
-  grid-column: 3 / span 1;
   &:hover,
   &:focus {
     background-color: #303f9f;

@@ -1,37 +1,44 @@
 import PropTypes from 'prop-types';
 
-import { useEffect, useCallback } from 'react';
+import { Component } from 'react';
 import { Overlay, ModalStyled } from './Modal.styled';
 import { createPortal } from 'react-dom';
 
-export const Modal = ({ onClose, url }) => {
-  const escFunction = useCallback(
-    event => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    },
-    [onClose]
-  );
+export class Modal extends Component {
+  static defaultPropTypes = {
+    onClose: PropTypes.func,
+    url: PropTypes.string,
+  };
+  static defaultProps = {
+    url: '',
 
-  useEffect(() => {
-    document.addEventListener('keydown', escFunction, false);
+    onClose: () => ({}),
+  };
+  escFunction = event => {
+    if (event.key === 'Escape') {
+      this.props.onClose();
+    }
+  };
+  componentDidMount() {
+    document.addEventListener('keydown', this.escFunction, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.escFunction, false);
+  }
 
-    return () => {
-      document.removeEventListener('keydown', escFunction, false);
-    };
-  }, [escFunction]);
-
-  const modalRoot = document.querySelector('#modal-root');
-  return createPortal(
-    <Overlay onClick={onClose}>
-      <ModalStyled>
-        <img src={url} alt="broken " />
-      </ModalStyled>
-    </Overlay>,
-    modalRoot
-  );
-};
+  render() {
+    const modalRoot = document.querySelector('#modal-root');
+    const { onClose, url } = this.props;
+    return createPortal(
+      <Overlay onClick={onClose}>
+        <ModalStyled>
+          <img src={url} alt="broken " />
+        </ModalStyled>
+      </Overlay>,
+      modalRoot
+    );
+  }
+}
 Modal.propTypes = {
   onClose: PropTypes.func,
   url: PropTypes.string,
