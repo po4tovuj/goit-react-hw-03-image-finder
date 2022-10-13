@@ -21,7 +21,7 @@ const options = {
   fontSize: '20px',
   width: 'fit-content',
   timeout: 1500,
-  showOnlyLast: true,
+  showOnlyTheLastOne: true,
 };
 
 export class App extends Component {
